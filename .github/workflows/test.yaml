@@ -6,7 +6,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
- 
+
     steps:
     - name: Step 1
       id: step1
@@ -20,10 +20,14 @@ jobs:
       run: |
        echo $VAR2
        echo $VAR1
-        
+
       env:
         VAR1: ${{ steps.step1.outputs.VAR1 }}
 
     - name: this should not run
       run: echo "This should not run"
       if: steps.step1.outputs.VAR1 == 'Lucy'
+
+    - name: this should run
+      run: echo "This should run"
+      if: steps.step1.outputs.VAR1 == 'Hamel'
